@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"flag"
-	gw "github.com/0x10f/tron-grpc-gateway/api"
+	gw "github.com/d1mpi/grpc-tron/api"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"log"
@@ -19,6 +19,11 @@ var (
 
 type WalletServer struct {
 	gw.WalletServer
+	client gw.WalletClient
+}
+
+type WalletSolidityServer struct {
+	gw.WalletSolidityServer
 	client gw.WalletClient
 }
 
@@ -41,7 +46,7 @@ func main() {
 	gw.RegisterWalletServer(s, &WalletServer{
 		client: client,
 	})
-	gw.RegisterWalletSolidityServer(s, &WalletServer{
+	gw.RegisterWalletSolidityServer(s, &WalletSolidityServer{
 		client: client,
 	})
 	gw.RegisterWalletExtensionServer(s, &ExtensionServer{})

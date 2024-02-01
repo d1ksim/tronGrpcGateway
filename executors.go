@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	gw "github.com/0x10f/tron-grpc-gateway/api"
-	"github.com/0x10f/tron-grpc-gateway/core"
+	gw "github.com/d1mpi/grpc-tron/api"
+	"github.com/d1mpi/grpc-tron/core"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"

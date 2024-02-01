@@ -1,6 +1,6 @@
-github.com/0x10f/tron-grpc-gateway v0.0.0-20200108063055-b06ffd23be82 h1:qi6bRncx4ZjGURS8h6hdu9AQhKVTGKRu9jc2c6IV4hc=
-github.com/0x10f/tron-grpc-gateway v0.0.0-20200108063055-b06ffd23be82/go.mod h1:PfCyavnlWFrRa0extoM9NBFijzv0xor8/9nioeC6G9o=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
+github.com/d1mpi/grpc-tron v0.0.0-20240201150309-9c7225cf3469 h1:eFP5ChTPvqWKVNgB9lnU8zgJKMlrpsoem6O4Ipb41UU=
+github.com/d1mpi/grpc-tron v0.0.0-20240201150309-9c7225cf3469/go.mod h1:hvPiNj1cYzV3WLqIMslccx4vmR0ZV+RHop8RlKJBDu0=
 github.com/golang/protobuf v1.5.0/go.mod h1:FsONVRAS9T7sI+LIUmWTfcYkHO4aIWwzhcaSAoJOfIk=
 github.com/golang/protobuf v1.5.3 h1:KhyjKVUg7Usr/dYsdSqoFveMYd5ko72D+zANwlG1mmg=
 github.com/golang/protobuf v1.5.3/go.mod h1:XVQd3VNwM+JqD3oG2Ue2ip4fOMUkwXdXDdiuN0vRsmY=
