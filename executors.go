@@ -625,3 +625,12 @@ func (s *WalletServer) ListWitnesses(ctx context.Context, in *gw.EmptyMessage) (
 
 	return witness, nil
 }
+
+func (s *WalletServer) EstimateEnergy(ctx context.Context, in *core.TriggerSmartContract) (*gw.EstimateEnergyMessage, error) {
+	message, err := s.client.EstimateEnergy(ctx, in)
+	if err != nil {
+		return nil, err
+	}
+
+	return message, nil
+}

@@ -20,7 +20,6 @@ option java_outer_classname = "GrpcAPI"; //Specify the class name of the generat
 option go_package = "github.com/d1mpi/grpc-tron/api";
 
 service Wallet {
-
   rpc GetAccount (Account) returns (Account) {
     option (google.api.http) = {
       post: "/wallet/getaccount"

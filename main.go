@@ -5,6 +5,7 @@ import (
 	"flag"
 	gw "github.com/d1mpi/grpc-tron/api"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
@@ -29,6 +30,7 @@ type WalletSolidityServer struct {
 
 type ExtensionServer struct {
 	gw.WalletExtensionServer
+	client gw.WalletClient
 }
 
 func main() {
@@ -49,7 +51,9 @@ func main() {
 	gw.RegisterWalletSolidityServer(s, &WalletSolidityServer{
 		client: client,
 	})
-	gw.RegisterWalletExtensionServer(s, &ExtensionServer{})
+	gw.RegisterWalletExtensionServer(s, &ExtensionServer{
+		client: client,
+	})
 
 	reflection.Register(s)
 
@@ -59,6 +63,8 @@ func main() {
 }
 
 func UnaryServerInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
+	md, _ := metadata.FromIncomingContext(ctx)
+	println(md.Get("TRON-PRO-API-KEY")[0])
 	resp, err = handler(ctx, req)
 	return resp, err
 }
