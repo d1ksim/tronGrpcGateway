@@ -2,20 +2,14 @@ package main
 
 import (
 	"context"
-	"flag"
 	gw "github.com/d1mpi/grpc-tron/api"
+	"github.com/spf13/viper"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
-	"strconv"
-)
-
-var (
-	port   = flag.Int("port", 59151, "port of your tron grpc service")
-	host   = flag.String("host", "5.39.223.8", "host of your tron grpc service")
-	listen = flag.Int("listen", 59151, "the port that grpc WalletServer listen")
+	"tronGrpcGateway/bot"
 )
 
 type WalletServer struct {
@@ -34,7 +28,16 @@ type ExtensionServer struct {
 }
 
 func main() {
-	lis, err := net.Listen("tcp", ":"+strconv.Itoa(*listen))
+	viper.SetConfigName("config")
+	viper.SetConfigType("yaml")
+	viper.AddConfigPath(".")
+
+	err := viper.ReadInConfig()
+	if err != nil {
+		log.Panicf("Fatal error config file: %s\n", err)
+	}
+
+	lis, err := net.Listen("tcp", ":"+viper.GetString("server.listen"))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
@@ -44,6 +47,8 @@ func main() {
 
 	var client = InitGrpcClient()
 	log.Println("Tron GRPC successful started!")
+
+	bot.InitTelegramBot()
 
 	gw.RegisterWalletServer(s, &WalletServer{
 		client: client,

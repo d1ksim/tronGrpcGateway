@@ -4,14 +4,14 @@ import (
 	"context"
 	gw "github.com/d1mpi/grpc-tron/api"
 	"github.com/d1mpi/grpc-tron/core"
+	"github.com/spf13/viper"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
-	"strconv"
 )
 
 func InitGrpcClient() gw.WalletClient {
-	grpcEndpoint := *host + ":" + strconv.Itoa(*port)
+	grpcEndpoint := viper.GetString("server.host") + ":" + viper.GetString("server.port")
 
 	opts := []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())}
 	conn, err := grpc.Dial(grpcEndpoint, opts...)
