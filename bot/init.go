@@ -1,14 +1,14 @@
 package bot
 
 import (
-	"fmt"
 	"github.com/PaulSonOfLars/gotgbot/v2"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers"
+	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers/filters/callbackquery"
+	cmds "github.com/d1mpi/tronGrpcGateway/bot/commands"
 	"github.com/spf13/viper"
 	"log"
 	"time"
-	"github.com/d1mpi/tronGrpcGateway/bot/commands"
 )
 
 func InitTelegramBot() {
@@ -26,7 +26,12 @@ func InitTelegramBot() {
 		MaxRoutines: ext.DefaultMaxRoutines,
 	})
 	updater := ext.NewUpdater(dispatcher, nil)
-	dispatcher.AddHandler(handlers.NewCommand("start", commands.))
+
+	// commands
+	dispatcher.AddHandler(handlers.NewCommand("start", cmds.StartCommand))
+
+	// callbacks
+	dispatcher.AddHandler(handlers.NewCallback(callbackquery.Equal("accounts"), AccountsCallback))
 
 	err = updater.StartPolling(bot, &ext.PollingOpts{
 		DropPendingUpdates: true,
@@ -41,14 +46,4 @@ func InitTelegramBot() {
 		panic("failed to start polling: " + err.Error())
 	}
 	log.Printf("Bot %s has been started...\n", bot.User.Username)
-}
-
-func startCommand(b *gotgbot.Bot, ctx *ext.Context) error {
-	_, err := ctx.EffectiveMessage.Reply(b, fmt.Sprintf("Hello, I'm @%s. I <b>repeat</b> all your messages.", b.User.Username), &gotgbot.SendMessageOpts{
-		ParseMode: "html",
-	})
-	if err != nil {
-		return fmt.Errorf("failed to send start message: %w", err)
-	}
-	return nil
 }
