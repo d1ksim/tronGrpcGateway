@@ -3,6 +3,8 @@ github.com/PaulSonOfLars/gotgbot/v2 v2.0.0-rc.24/go.mod h1:kL1v4iIjlalwm3gCYGvF4
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/d1mpi/grpc-tron v0.0.0-20240201150309-9c7225cf3469 h1:eFP5ChTPvqWKVNgB9lnU8zgJKMlrpsoem6O4Ipb41UU=
 github.com/d1mpi/grpc-tron v0.0.0-20240201150309-9c7225cf3469/go.mod h1:hvPiNj1cYzV3WLqIMslccx4vmR0ZV+RHop8RlKJBDu0=
+github.com/d1mpi/grpc-tron v0.0.0-20240201195651-4500d0065044 h1:t9xNDFllLM3mdpoelv+LveBrzDIj4efuPvkaTDl7ByY=
+github.com/d1mpi/grpc-tron v0.0.0-20240201195651-4500d0065044/go.mod h1:hvPiNj1cYzV3WLqIMslccx4vmR0ZV+RHop8RlKJBDu0=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/fsnotify/fsnotify v1.7.0 h1:8JEhPFa5W2WU7YfeZzPNqzMP6Lwt7L2715Ggo0nosvA=

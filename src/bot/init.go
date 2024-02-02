@@ -24,7 +24,7 @@ func InitTelegramBot() {
 		MaxRoutines: ext.DefaultMaxRoutines,
 	})
 	updater := ext.NewUpdater(dispatcher, nil)
-	dispatcher.AddHandler(handlers.NewCommand("start", startCommand))
+	dispatcher.AddHandler(handlers.NewCommand("start"))
 
 	err = updater.StartPolling(bot, &ext.PollingOpts{
 		DropPendingUpdates: true,

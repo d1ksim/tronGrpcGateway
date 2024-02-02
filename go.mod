@@ -3,7 +3,7 @@ module tronGrpcGateway
 go 1.21
 
 require (
-	github.com/d1mpi/grpc-tron v0.0.0-20240201150309-9c7225cf3469
+	github.com/d1mpi/grpc-tron v0.0.0-20240201195651-4500d0065044
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.19.1
 	google.golang.org/genproto/googleapis/api v0.0.0-20240125205218-1f4bbc51befe
 	google.golang.org/grpc v1.61.0
