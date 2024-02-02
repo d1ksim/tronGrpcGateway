@@ -8,6 +8,7 @@ import (
 	"github.com/spf13/viper"
 	"log"
 	"time"
+	"github.com/d1mpi/tronGrpcGateway/bot/commands"
 )
 
 func InitTelegramBot() {
@@ -25,7 +26,7 @@ func InitTelegramBot() {
 		MaxRoutines: ext.DefaultMaxRoutines,
 	})
 	updater := ext.NewUpdater(dispatcher, nil)
-	dispatcher.AddHandler(handlers.NewCommand("start", startCommand))
+	dispatcher.AddHandler(handlers.NewCommand("start", commands.))
 
 	err = updater.StartPolling(bot, &ext.PollingOpts{
 		DropPendingUpdates: true,

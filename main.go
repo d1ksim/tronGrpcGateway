@@ -3,13 +3,13 @@ package main
 import (
 	"context"
 	gw "github.com/d1mpi/grpc-tron/api"
+	bot "github.com/d1mpi/tronGrpcGateway/bot"
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
-	bot "tronGrpcGateway/bot"
 )
 
 type WalletServer struct {
