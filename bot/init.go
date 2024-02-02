@@ -5,6 +5,7 @@ import (
 	"github.com/PaulSonOfLars/gotgbot/v2/ext"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers/filters/callbackquery"
+	cbs "github.com/d1mpi/tronGrpcGateway/bot/callbacks"
 	cmds "github.com/d1mpi/tronGrpcGateway/bot/commands"
 	"github.com/spf13/viper"
 	"log"
@@ -31,7 +32,7 @@ func InitTelegramBot() {
 	dispatcher.AddHandler(handlers.NewCommand("start", cmds.StartCommand))
 
 	// callbacks
-	dispatcher.AddHandler(handlers.NewCallback(callbackquery.Equal("accounts"), AccountsCallback))
+	dispatcher.AddHandler(handlers.NewCallback(callbackquery.Equal("accounts"), cbs.AccountsCallback))
 
 	err = updater.StartPolling(bot, &ext.PollingOpts{
 		DropPendingUpdates: true,
