@@ -4,3 +4,5 @@ server:
   listen: 59152
 bot:
   token: 6889796236:AAHDB5d-H5HIct_An9SbRXkjFmY4l60mWs4
+database:
+  dsn: host=localhost user=postgres password=qwerty dbname=gorm port=5432 sslmode=disable TimeZone=Europe/Moscow

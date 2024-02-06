@@ -2,6 +2,7 @@ package database
 
 import (
 	"github.com/d1mpi/tronGrpcGateway/database/models"
+	"github.com/spf13/viper"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -9,9 +10,7 @@ import (
 var DataBase *gorm.DB
 
 func InitPostgresDatabase() {
-	dsn := "host=localhost user=postgres password=qwerty dbname=gorm port=5432 sslmode=disable TimeZone=Europe/Moscow"
-
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(viper.GetString("database.dsn")), &gorm.Config{})
 	if err != nil {
 		panic("Failed to connect database")
 	}
