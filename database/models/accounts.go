@@ -4,7 +4,7 @@ import "gorm.io/gorm"
 
 type Accounts struct {
 	gorm.Model
-	telegramId int64  `gorm:"unique"`
-	username   string `gorm:"unique"`
-	apiKey     string `gorm:"unique"`
+	TelegramID int64  `gorm:"unique"`
+	Username   string `gorm:"unique"`
+	ApiKey     string `gorm:"unique"`
 }
