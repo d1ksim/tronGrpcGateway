@@ -36,7 +36,7 @@ func InitTelegramBot() {
 	dispatcher.AddHandler(handlers.NewCallback(callbackquery.Equal("accounts"), cbs.AccountsCallback))
 
 	// inline query
-	dispatcher.AddHandler(handlers.NewInlineQuery(inlinequery.All, source))
+	dispatcher.AddHandler(handlers.NewInlineQuery(inlinequery.All, accounts_list))
 
 	err = updater.StartPolling(bot, &ext.PollingOpts{
 		DropPendingUpdates: true,

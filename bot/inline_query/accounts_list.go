@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-func accounts_list(b *gotgbot.Bot, ctx *ext.Context) error {
+func AccountsList(b *gotgbot.Bot, ctx *ext.Context) error {
 	_, err := ctx.InlineQuery.Answer(b, []gotgbot.InlineQueryResult{gotgbot.InlineQueryResultArticle{
 		Id:      strconv.Itoa(rand.Int()),
 		Title:   "Bot Library",
