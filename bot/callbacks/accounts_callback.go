@@ -9,16 +9,30 @@ import (
 func AccountsCallback(b *gotgbot.Bot, ctx *ext.Context) error {
 	cb := ctx.Update.CallbackQuery
 
-	_, err := cb.Answer(b, &gotgbot.AnswerCallbackQueryOpts{
-		Text: "You pressed a button!",
-	})
+	switchInlineText := "accounts_list"
+
+	_, err := ctx.EffectiveChat.SendMessage(b, "<b>Выберите действие</b>",
+		&gotgbot.SendMessageOpts{
+			ReplyMarkup: gotgbot.InlineKeyboardMarkup{
+				InlineKeyboard: [][]gotgbot.InlineKeyboardButton{{
+					{
+						Text: "Список пользователей", SwitchInlineQueryCurrentChat: &switchInlineText,
+					},
+				}, {
+					{
+						Text: "Поиск по username", CallbackData: "search_by_username",
+					},
+				}},
+			},
+			ParseMode: "html",
+		})
 	if err != nil {
-		return fmt.Errorf("failed to answer start callback query: %w", err)
+		return fmt.Errorf("failed to send start message: %w", err)
 	}
 
-	_, _, err = cb.Message.EditText(b, "You edited the start message.", nil)
+	_, err = cb.Answer(b, &gotgbot.AnswerCallbackQueryOpts{})
 	if err != nil {
-		return fmt.Errorf("failed to edit start message text: %w", err)
+		return fmt.Errorf("failed to answer start callback query: %w", err)
 	}
 	return nil
 }
