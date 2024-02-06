@@ -4,6 +4,7 @@ import (
 	"context"
 	gw "github.com/d1mpi/grpc-tron/api"
 	"github.com/d1mpi/tronGrpcGateway/bot"
+	"github.com/d1mpi/tronGrpcGateway/database"
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
@@ -36,6 +37,9 @@ func main() {
 	if err != nil {
 		log.Panicf("Fatal error config file: %s\n", err)
 	}
+
+	database.InitPostgresDatabase()
+	log.Println("Init DataBase successful")
 
 	lis, err := net.Listen("tcp", ":"+viper.GetString("server.listen"))
 	if err != nil {
