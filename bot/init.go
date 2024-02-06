@@ -8,6 +8,7 @@ import (
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers/filters/inlinequery"
 	cbs "github.com/d1mpi/tronGrpcGateway/bot/callbacks"
 	cmds "github.com/d1mpi/tronGrpcGateway/bot/commands"
+	"github.com/d1mpi/tronGrpcGateway/bot/inline_query"
 	"github.com/spf13/viper"
 	"log"
 	"time"
@@ -36,7 +37,7 @@ func InitTelegramBot() {
 	dispatcher.AddHandler(handlers.NewCallback(callbackquery.Equal("accounts"), cbs.AccountsCallback))
 
 	// inline query
-	dispatcher.AddHandler(handlers.NewInlineQuery(inlinequery.All, accounts_list))
+	dispatcher.AddHandler(handlers.NewInlineQuery(inlinequery.Query("accounts_list"), inline_query.AccountsList))
 
 	err = updater.StartPolling(bot, &ext.PollingOpts{
 		DropPendingUpdates: true,
