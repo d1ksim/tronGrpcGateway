@@ -5,10 +5,15 @@ import (
 	"github.com/PaulSonOfLars/gotgbot/v2"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers"
+	"strconv"
+	"strings"
 )
 
 func (c *Client) ChangePriceCallback(b *gotgbot.Bot, ctx *ext.Context) error {
-	_, err := ctx.EffectiveMessage.Reply(b, fmt.Sprintf("Hello, I'm @%s.\nWhat is your name?.", b.User.Username), &gotgbot.SendMessageOpts{
+	cb := ctx.Update.CallbackQuery
+	accountId, _ := strconv.Atoi(strings.Split(cb.Data, ":")[1])
+
+	_, err := ctx.EffectiveMessage.Reply(b, "Пожалуйста, введите новую цену за подписку:", &gotgbot.SendMessageOpts{
 		ParseMode: "html",
 	})
 
@@ -16,7 +21,6 @@ func (c *Client) ChangePriceCallback(b *gotgbot.Bot, ctx *ext.Context) error {
 		return fmt.Errorf("failed to send start message: %w", err)
 	}
 
-	c.SetUserData(ctx, "test", "hello")
-
+	c.SetUserData(ctx, "accountId", accountId)
 	return handlers.NextConversationState("price")
 }

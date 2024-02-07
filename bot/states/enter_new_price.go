@@ -9,7 +9,9 @@ import (
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers/filters/callbackquery"
 	"github.com/d1mpi/tronGrpcGateway/bot/callbacks"
 	"github.com/d1mpi/tronGrpcGateway/bot/commands"
-	"html"
+	"github.com/d1mpi/tronGrpcGateway/database"
+	"github.com/d1mpi/tronGrpcGateway/database/models"
+	"strconv"
 )
 
 const (
@@ -37,16 +39,19 @@ func RegisterEnterNewPriceState(dispatcher *ext.Dispatcher) {
 }
 
 func (c *CallbackStorage) price(b *gotgbot.Bot, ctx *ext.Context) error {
-	inputName := ctx.EffectiveMessage.Text
-	_, err := ctx.EffectiveMessage.Reply(b, fmt.Sprintf("Nice to meet you, %s!\n\nAnd how old are you?", html.EscapeString(inputName)), &gotgbot.SendMessageOpts{
+	accountId, _ := c.storage.GetUserData(ctx, "accountId")
+	subscribePrice, _ := strconv.Atoi(ctx.EffectiveMessage.Text)
+
+	var account models.Accounts
+	database.DataBase.First(&account, accountId)
+	database.DataBase.Model(&account).Update("subscribe_price", subscribePrice)
+
+	_, err := ctx.EffectiveMessage.Reply(b, fmt.Sprintf("Пользователю @%s установлена новая плата за подписку: $%d", account.Username, subscribePrice), &gotgbot.SendMessageOpts{
 		ParseMode: "html",
 	})
 	if err != nil {
 		return fmt.Errorf("failed to send name message: %w", err)
 	}
-
-	v, _ := c.storage.GetUserData(ctx, "test")
-	println(v.(string))
 
 	return handlers.EndConversation()
 }
