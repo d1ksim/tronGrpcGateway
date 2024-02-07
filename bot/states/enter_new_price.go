@@ -46,7 +46,7 @@ func (c *CallbackStorage) price(b *gotgbot.Bot, ctx *ext.Context) error {
 	database.DataBase.First(&account, accountId)
 	database.DataBase.Model(&account).Update("subscribe_price", subscribePrice)
 
-	_, err := ctx.EffectiveMessage.Reply(b, fmt.Sprintf("Пользователю @%s установлена новая плата за подписку: $%d", account.Username, subscribePrice), &gotgbot.SendMessageOpts{
+	_, err := ctx.EffectiveMessage.Reply(b, fmt.Sprintf("<b>Пользователю @%s установлена новая плата за подписку:</b> $%d", account.Username, subscribePrice), &gotgbot.SendMessageOpts{
 		ParseMode: "html",
 	})
 	if err != nil {
