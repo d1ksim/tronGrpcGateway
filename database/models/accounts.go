@@ -1,10 +1,16 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+	"time"
+)
 
 type Accounts struct {
 	gorm.Model
-	TelegramID int64  `gorm:"unique"`
-	Username   string `gorm:"unique"`
-	ApiKey     string `gorm:"unique"`
+	TelegramID     int64  `gorm:"unique"`
+	Username       string `gorm:"unique"`
+	AccessKey      string `gorm:"unique"`
+	LastPayment    *time.Time
+	SubscribePrice int16 `gorm:"default:50"`
+	Active         bool  `gorm:"default:true"`
 }

@@ -9,7 +9,7 @@ import (
 func AccountsCallback(b *gotgbot.Bot, ctx *ext.Context) error {
 	cb := ctx.Update.CallbackQuery
 
-	switchInlineText := "accounts_list"
+	switchInlineText := "accounts_list 1"
 
 	_, err := ctx.EffectiveChat.SendMessage(b, "<b>Выберите действие</b>",
 		&gotgbot.SendMessageOpts{

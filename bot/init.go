@@ -10,6 +10,8 @@ import (
 	cbs "github.com/d1mpi/tronGrpcGateway/bot/callbacks"
 	cmds "github.com/d1mpi/tronGrpcGateway/bot/commands"
 	"github.com/d1mpi/tronGrpcGateway/bot/inline_query"
+	"github.com/d1mpi/tronGrpcGateway/bot/inline_result"
+	"github.com/d1mpi/tronGrpcGateway/bot/states"
 	"github.com/spf13/viper"
 	"log"
 	"time"
@@ -36,12 +38,16 @@ func InitTelegramBot() {
 
 	// callbacks
 	dispatcher.AddHandler(handlers.NewCallback(callbackquery.Equal("accounts"), cbs.AccountsCallback))
+	dispatcher.AddHandler(handlers.NewCallback(callbackquery.Prefix("ban_user"), cbs.BanUserCallback))
 
 	// inline query
-	dispatcher.AddHandler(handlers.NewInlineQuery(inlinequery.Query("accounts_list"), inline_query.AccountsList))
+	dispatcher.AddHandler(handlers.NewInlineQuery(inlinequery.QueryPrefix("accounts_list"), inline_query.AccountsList))
 
 	// chosen inline result
-	dispatcher.AddHandler(handlers.NewChosenInlineResult(choseninlineresult.All))
+	dispatcher.AddHandler(handlers.NewChosenInlineResult(choseninlineresult.All, inline_result.AccountsList))
+
+	// states
+	states.RegisterEnterNewPriceState(dispatcher)
 
 	err = updater.StartPolling(bot, &ext.PollingOpts{
 		DropPendingUpdates: true,

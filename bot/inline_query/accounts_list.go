@@ -7,13 +7,21 @@ import (
 	"github.com/d1mpi/tronGrpcGateway/database"
 	"github.com/d1mpi/tronGrpcGateway/database/models"
 	"strconv"
+	"strings"
 )
 
 func AccountsList(b *gotgbot.Bot, ctx *ext.Context) error {
 	var usersResult []gotgbot.InlineQueryResult
 	var accounts []models.Accounts
 
-	database.DataBase.Find(&accounts)
+	queryList := strings.Split(ctx.InlineQuery.Query, " ")[1:]
+	page, err := strconv.Atoi(queryList[0])
+	if err != nil {
+		return fmt.Errorf("failed convert string to int: %w", err)
+	}
+
+	offset := (50 * page) - 50
+	database.DataBase.Limit(50).Offset(offset).Find(&accounts)
 
 	for _, v := range accounts {
 		usersResult = append(usersResult, gotgbot.InlineQueryResultArticle{
@@ -25,7 +33,7 @@ func AccountsList(b *gotgbot.Bot, ctx *ext.Context) error {
 		})
 	}
 
-	_, err := ctx.InlineQuery.Answer(b, usersResult, &gotgbot.AnswerInlineQueryOpts{
+	_, err = ctx.InlineQuery.Answer(b, usersResult, &gotgbot.AnswerInlineQueryOpts{
 		IsPersonal: false,
 		CacheTime:  15,
 	})
