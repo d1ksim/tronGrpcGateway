@@ -1,4 +1,4 @@
-package bot
+package callbacks
 
 import (
 	"github.com/PaulSonOfLars/gotgbot/v2/ext"

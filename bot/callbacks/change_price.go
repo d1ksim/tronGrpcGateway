@@ -5,10 +5,7 @@ import (
 	"github.com/PaulSonOfLars/gotgbot/v2"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers"
-	"github.com/d1mpi/tronGrpcGateway/bot"
 )
-
-type Client bot.Client
 
 func (c *Client) ChangePriceCallback(b *gotgbot.Bot, ctx *ext.Context) error {
 	_, err := ctx.EffectiveMessage.Reply(b, fmt.Sprintf("Hello, I'm @%s.\nWhat is your name?.", b.User.Username), &gotgbot.SendMessageOpts{
@@ -19,7 +16,7 @@ func (c *Client) ChangePriceCallback(b *gotgbot.Bot, ctx *ext.Context) error {
 		return fmt.Errorf("failed to send start message: %w", err)
 	}
 
-	ctx.Data["x"] = "x"
+	c.SetUserData(ctx, "test", "hello")
 
 	return handlers.NextConversationState("price")
 }

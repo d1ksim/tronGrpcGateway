@@ -16,11 +16,17 @@ const (
 	PRICE = "price"
 )
 
+type CallbackStorage struct {
+	storage callbacks.Client
+}
+
 func RegisterEnterNewPriceState(dispatcher *ext.Dispatcher) {
+	client := CallbackStorage{}
+
 	dispatcher.AddHandler(handlers.NewConversation(
-		[]ext.Handler{handlers.NewCallback(callbackquery.Prefix("change_price"), callbacks.ChangePriceCallback)},
+		[]ext.Handler{handlers.NewCallback(callbackquery.Prefix("change_price"), client.storage.ChangePriceCallback)},
 		map[string][]ext.Handler{
-			PRICE: {handlers.NewMessage(NoCommands, price)},
+			PRICE: {handlers.NewMessage(NoCommands, client.price)},
 		},
 		&handlers.ConversationOpts{
 			Exits:        []ext.Handler{handlers.NewCommand("cancel", commands.CancelCommand)},
@@ -30,7 +36,7 @@ func RegisterEnterNewPriceState(dispatcher *ext.Dispatcher) {
 	))
 }
 
-func price(b *gotgbot.Bot, ctx *ext.Context) error {
+func (c *CallbackStorage) price(b *gotgbot.Bot, ctx *ext.Context) error {
 	inputName := ctx.EffectiveMessage.Text
 	_, err := ctx.EffectiveMessage.Reply(b, fmt.Sprintf("Nice to meet you, %s!\n\nAnd how old are you?", html.EscapeString(inputName)), &gotgbot.SendMessageOpts{
 		ParseMode: "html",
@@ -39,7 +45,8 @@ func price(b *gotgbot.Bot, ctx *ext.Context) error {
 		return fmt.Errorf("failed to send name message: %w", err)
 	}
 
-	println(ctx.Data["x"])
+	v, _ := c.storage.GetUserData(ctx, "test")
+	println(v.(string))
 
 	return handlers.EndConversation()
 }
