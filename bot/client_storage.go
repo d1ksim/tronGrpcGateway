@@ -6,8 +6,7 @@ import (
 )
 
 type Client struct {
-	rwMux sync.RWMutex
-
+	rwMux    sync.RWMutex
 	userData map[int64]map[string]any
 
 	// This struct could also contain:

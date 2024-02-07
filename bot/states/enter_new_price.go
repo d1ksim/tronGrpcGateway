@@ -7,7 +7,7 @@ import (
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers/conversation"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers/filters/callbackquery"
-	cbs "github.com/d1mpi/tronGrpcGateway/bot/callbacks"
+	"github.com/d1mpi/tronGrpcGateway/bot/callbacks"
 	"github.com/d1mpi/tronGrpcGateway/bot/commands"
 	"html"
 )
@@ -18,7 +18,7 @@ const (
 
 func RegisterEnterNewPriceState(dispatcher *ext.Dispatcher) {
 	dispatcher.AddHandler(handlers.NewConversation(
-		[]ext.Handler{handlers.NewCallback(callbackquery.Prefix("change_price"), cbs.ChangePriceCallback)},
+		[]ext.Handler{handlers.NewCallback(callbackquery.Prefix("change_price"), callbacks.ChangePriceCallback)},
 		map[string][]ext.Handler{
 			PRICE: {handlers.NewMessage(NoCommands, price)},
 		},

@@ -8,7 +8,9 @@ import (
 	"github.com/d1mpi/tronGrpcGateway/bot"
 )
 
-func (c *bot.Client) ChangePriceCallback(b *gotgbot.Bot, ctx *ext.Context) error {
+type Client bot.Client
+
+func (c *Client) ChangePriceCallback(b *gotgbot.Bot, ctx *ext.Context) error {
 	_, err := ctx.EffectiveMessage.Reply(b, fmt.Sprintf("Hello, I'm @%s.\nWhat is your name?.", b.User.Username), &gotgbot.SendMessageOpts{
 		ParseMode: "html",
 	})
