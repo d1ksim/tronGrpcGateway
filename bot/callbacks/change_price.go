@@ -13,7 +13,7 @@ func (c *Client) ChangePriceCallback(b *gotgbot.Bot, ctx *ext.Context) error {
 	cb := ctx.Update.CallbackQuery
 	accountId, _ := strconv.Atoi(strings.Split(cb.Data, ":")[1])
 
-	_, err := ctx.EffectiveMessage.Reply(b, "Пожалуйста, введите новую цену за подписку:", &gotgbot.SendMessageOpts{
+	_, err := ctx.EffectiveMessage.Reply(b, "<b>Пожалуйста, введите новую цену за подписку:</b>", &gotgbot.SendMessageOpts{
 		ParseMode: "html",
 	})
 
