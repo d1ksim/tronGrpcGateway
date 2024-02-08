@@ -1,5 +1,3 @@
-github.com/PaulSonOfLars/gotgbot/v2 v2.0.0-rc.24 h1:1T7RcpzlldaJ3qpZi0lNg/lBsfPCK+8n8Wc+R8EhAkU=
-github.com/PaulSonOfLars/gotgbot/v2 v2.0.0-rc.24/go.mod h1:kL1v4iIjlalwm3gCYGvF4NLa3hs+aKEfRkNJvj4aoDU=
 github.com/d1mpi/grpc-tron v0.0.0-20240202182554-c23cdf00fb2e h1:cxRXthRoUzovHkxxCVzgJ52m+rv3+v13gzY++ARJxKk=
 github.com/d1mpi/grpc-tron v0.0.0-20240202182554-c23cdf00fb2e/go.mod h1:hvPiNj1cYzV3WLqIMslccx4vmR0ZV+RHop8RlKJBDu0=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

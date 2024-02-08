@@ -3,7 +3,6 @@ module github.com/d1mpi/tronGrpcGateway
 go 1.21
 
 require (
-	github.com/PaulSonOfLars/gotgbot/v2 v2.0.0-rc.24
 	github.com/d1mpi/grpc-tron v0.0.0-20240202182554-c23cdf00fb2e
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.19.1
 	github.com/spf13/viper v1.18.2

@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	gw "github.com/d1mpi/grpc-tron/api"
-	"github.com/d1mpi/tronGrpcGateway/bot"
 	"github.com/d1mpi/tronGrpcGateway/database"
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
@@ -51,8 +50,6 @@ func main() {
 
 	var client = InitGrpcClient()
 	log.Println("Tron GRPC successful started!")
-
-	bot.InitTelegramBot()
 
 	gw.RegisterWalletServer(s, &WalletServer{
 		client: client,
